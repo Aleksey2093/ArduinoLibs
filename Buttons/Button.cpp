@@ -1,4 +1,4 @@
-#include "button.h"
+#include "Button.h"
 
 ButtonByAlex::ButtonByAlex(uint8_t pin, uint8_t mode) {
     this->pin = pin;
