@@ -1,12 +1,15 @@
 #include "Button.h"
 
+#define ENABLE_POSITION 0
+#define FLAG_POSITION 1
+#define WAS_CLICK_POSITION 2
+#define DOWN_POSITION 3
+#define UP_POSITION 4
+
 ButtonByAlex::ButtonByAlex(uint8_t pin, uint8_t mode) {
     this->pin = pin;
     this->mode = mode;
     pinMode(pin, INPUT_PULLUP);
-    for (uint8_t i=0;i<8;i++) {
-        this->state &= ~(1<<i); 
-    }
 }
 
 uint8_t ButtonByAlex::getClickCount() {
@@ -18,64 +21,44 @@ uint32_t ButtonByAlex::getTimeOfDown() {
 }
 
 boolean ButtonByAlex::isEnabled() {
-    return (bool((1 << 0)  &  state));
+    return this->state.getValue(ENABLE_POSITION);
 }
 
 void ButtonByAlex::setEnabled(bool value) {
-    if (value) {
-        this->state |= (1 << 0);
-    } else {
-        this->state &= ~(1 << 0);
-    }
+    this->state.setValue(ENABLE_POSITION,value);
 }
 
 bool ButtonByAlex::isFlag() {
-    return (bool((1 << 1)  &  state));
+    return this->state.getValue(FLAG_POSITION);
 }
 
 void ButtonByAlex::setFlag(bool value) {
-    if (value) {
-        this->state |= (1 << 1);
-    } else {
-        this->state &= ~(1 << 1);
-    }
+    this->state.setValue(FLAG_POSITION,value);
 } 
 
 boolean ButtonByAlex::wasClick() {
-    return (bool((1 << 2)  &  state));
+    return this->state.getValue(WAS_CLICK_POSITION);
 }
 
 void ButtonByAlex::setWasClick(bool value) {
-    if (value) {
-        this->state |= (1 << 2);
-    } else {
-        this->state &= ~(1 << 2);
-    }
+    this->state.setValue(WAS_CLICK_POSITION,value);
 }
 
 boolean ButtonByAlex::isDown() {
-    return (bool((1 << 3)  &  state));
+    return this->state.getValue(DOWN_POSITION);
 }
 
 void ButtonByAlex::setDown(bool value) {
-    if (value) {
-        this->state |= (1 << 3);
-    } else {
-        this->state &= ~(1 << 3);
-    }
+    this->state.setValue(DOWN_POSITION,value);
 }
 
 
 boolean ButtonByAlex::isUp() {
-    return (bool((1 << 4)  &  state));
+    return this->state.getValue(UP_POSITION);
 }
 
 void ButtonByAlex::setUp(bool value) {
-    if (value) {
-        this->state |= (1 << 4);
-    } else {
-        this->state &= ~(1 << 4);
-    }
+return this->state.setValue(UP_POSITION,value);
 }
 
 void ButtonByAlex::tick() {

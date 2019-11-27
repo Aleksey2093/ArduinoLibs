@@ -1,5 +1,7 @@
 #pragma once
 #include <Arduino.h>
+#include "../AddLibs/Bits.h"
+
 
 class ButtonByAlex
 {
@@ -9,7 +11,7 @@ class ButtonByAlex
         uint32_t timer = 0;
         uint32_t timerUp = 0;
 
-        uint8_t state = 0;
+        BitsValue state = BitsValue();
 
         uint8_t click_count = 0;
         uint16_t timeout = 500;
