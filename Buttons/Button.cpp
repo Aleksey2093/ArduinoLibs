@@ -72,18 +72,20 @@ void ButtonByAlex::tick() {
         this->setUp(false);
     }
 
+    this->setWasClick(false);
     if (down && !this->isFlag() && millis() - this->timer > this->click_timeout) {
         this->setFlag(true);
         this->setWasClick(true);
         this->click_count = this->click_count + 1;
         this->timer = millis();
+        Serial.println("1");
     } else if (!down && this->isFlag()) {
         if (this->isDown() == false) {
             this->setEnabled(!this->isEnabled());
         }
         this->setFlag(false);
         this->setDown(false);
-        this->setWasClick(false);
+        Serial.println("2");
     }
     if (down && this->isFlag() && millis() - this->timer > this->step_timeout) {
         this->setDown(true);
